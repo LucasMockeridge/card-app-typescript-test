@@ -1,5 +1,5 @@
-import { useRef, useContext } from "react";
-import { DarkModeContext } from '../utilities/globalContext'
+import { useContext, useRef } from "react";
+import { DarkModeContext } from "../utilities/globalContext";
 
 export default function Settings() {
   const settingsRef = useRef<HTMLDialogElement>(null);
@@ -14,7 +14,7 @@ export default function Settings() {
     }
   }
 
-	const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext)
+  const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
     <>
@@ -34,7 +34,13 @@ export default function Settings() {
       >
         <div className="grid grid-rows-2 justify-items-center gap-3">
           <h1 className="col-span-2">Settings</h1>
-          <input className="row-start-2" id="dark-mode" type="checkbox" checked={isDarkMode === true} onChange={toggleDarkMode} />
+          <input
+            className="row-start-2"
+            id="dark-mode"
+            type="checkbox"
+            checked={isDarkMode === true}
+            onChange={toggleDarkMode}
+          />
           <label className="row-start-2" htmlFor="dark-mode">
             Dark Mode
           </label>
