@@ -45,7 +45,7 @@ export default function NewEntry() {
       <label htmlFor="schedule">Scheduled for</label>
       <input
         className="p-3 rounded-md"
-	id="schedule"
+        id="schedule"
         type="date"
         name="scheduled"
         value={new Date(newEntry.scheduled).toISOString().split("T")[0]}
