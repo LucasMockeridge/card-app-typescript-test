@@ -44,20 +44,20 @@ export const EntryProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 export const DarkModeContext = createContext<DarkModeContextType | null>(null);
 
 export const DarkModeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const isDark = localStorage.getItem("isDark") === "true" ? true : false
-	if (isDark){
-		document.body.classList.add("darkMode");
-	}
+  const isDark = localStorage.getItem("isDark") === "true" ? true : false;
+  if (isDark) {
+    document.body.classList.add("darkMode");
+  }
 
   const [isDarkMode, setIsDarkMode] = useState<boolean>(isDark);
 
   const toggleDarkMode = () => {
     if (!isDarkMode) {
       document.body.classList.add("darkMode");
-	localStorage.setItem("isDark", "true")
+      localStorage.setItem("isDark", "true");
     } else {
       document.body.classList.remove("darkMode");
-	localStorage.setItem("isDark", "false")
+      localStorage.setItem("isDark", "false");
     }
     setIsDarkMode(!isDarkMode);
   };
