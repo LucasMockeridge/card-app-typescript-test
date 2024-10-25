@@ -4,8 +4,7 @@ import { server } from "../src/server";
 
 describe("test backend API", () => {
   it("POST /create/ should add a valid entry; DELETE /delete/ should remove a valid entry", async () => {
-
-	  // Create a dummy entry
+    // Create a dummy entry
     const newEntry = {
       title: "Test",
       description: "Test description.",
@@ -77,7 +76,7 @@ describe("test backend API", () => {
     expect(payload).not.toContainEqual({ id, ...newEntry });
   });
   it("POST /create/ should stop a duplicate entry", async () => {
-	  // Create a dummy entry
+    // Create a dummy entry
     const newEntry = {
       title: "Test",
       description: "Test description.",
@@ -94,7 +93,7 @@ describe("test backend API", () => {
 
     expect(response.statusCode).toEqual(200);
 
-	// Retrieve id
+    // Retrieve id
     let payload = JSON.parse(response.payload);
     expect(payload).toHaveProperty("id");
     let id = payload.id;
@@ -109,7 +108,7 @@ describe("test backend API", () => {
 
     expect(response.statusCode).toEqual(500);
 
-	// Find entry in database using id
+    // Find entry in database using id
     response = await server.inject({
       method: "GET",
       url: "/get/" + id,
@@ -159,14 +158,14 @@ describe("test backend API", () => {
   });
 
   it("POST /create/ should not add an invalid entry", async () => {
-	  // Create an invalid entry
+    // Create an invalid entry
     const newEntry = {
       description: "Test description.",
       created_at: new Date().toISOString(),
       scheduled: new Date().toISOString(),
     };
 
-// Add invalid entry to database
+    // Add invalid entry to database
     let response = await server.inject({
       method: "POST",
       url: "/create/",
@@ -177,7 +176,7 @@ describe("test backend API", () => {
   });
 
   it("PUT /update/ should update a valid entry; DELETE /delete/ should remove an updated entry", async () => {
-	 // Create a dummy entry
+    // Create a dummy entry
     const newEntry = {
       title: "Test",
       description: "Test description.",
@@ -241,7 +240,7 @@ describe("test backend API", () => {
 
     expect(response.statusCode).toEqual(200);
 
-        // Check entry has gone using id
+    // Check entry has gone using id
     response = await server.inject({
       method: "GET",
       url: "/get/" + id,
@@ -261,7 +260,7 @@ describe("test backend API", () => {
     expect(payload).not.toContainEqual(expect.objectContaining({ id, title: "Updated Title" }));
   });
   it("PUT /update/ should stop an invalid update", async () => {
-	  // Create a dummy entry
+    // Create a dummy entry
     const newEntry = {
       title: "Test",
       description: "Test description.",
@@ -303,7 +302,7 @@ describe("test backend API", () => {
 
     expect(response.statusCode).toEqual(200);
 
-    // Check entry has gone using id 
+    // Check entry has gone using id
     response = await server.inject({
       method: "GET",
       url: "/get/" + id,
@@ -311,7 +310,7 @@ describe("test backend API", () => {
 
     expect(response.statusCode).toEqual(500);
 
-    // Check entry has gone by fetching all entries 
+    // Check entry has gone by fetching all entries
     response = await server.inject({
       method: "GET",
       url: "/get/",
@@ -324,7 +323,7 @@ describe("test backend API", () => {
   });
 
   it("PUT /update/ should not create an entry", async () => {
-	  // Create a dummy entry
+    // Create a dummy entry
     const newEntry = {
       id: 5000,
       title: "Test",
@@ -363,7 +362,7 @@ describe("test backend API", () => {
   });
 
   it("DELETE /delete/ should stop an invalid delete", async () => {
-	  // Attempt to remove a phantom entry
+    // Attempt to remove a phantom entry
     let response = await server.inject({
       method: "DELETE",
       url: "/delete/5000",
