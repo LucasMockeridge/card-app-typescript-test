@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { DarkModeContext } from '../utilities/globalContext'
 
 export default function Settings() {
   const settingsRef = useRef<HTMLDialogElement>(null);
@@ -13,6 +14,8 @@ export default function Settings() {
     }
   }
 
+	const { isDarkMode, toggleDarkMode } = useContext(DarkModeContext)
+
   return (
     <>
       <button
@@ -21,15 +24,21 @@ export default function Settings() {
       >
         Settings
       </button>
-      <dialog onClick={(e) => {
-		if(e.currentTarget === e.target){
-			toggleSettings()
-		}}} ref={settingsRef}>
-		<div className="grid grid-rows-2 justify-items-center gap-3">
-            		<h1 className="col-span-2">Settings</h1>
-      			<input className="row-start-2" id="dark-mode" type="checkbox" />
-          		<label className="row-start-2" htmlFor="dark-mode">Dark Mode</label>
-            	</div>
+      <dialog
+        onClick={(e) => {
+          if (e.currentTarget === e.target) {
+            toggleSettings();
+          }
+        }}
+        ref={settingsRef}
+      >
+        <div className="grid grid-rows-2 justify-items-center gap-3">
+          <h1 className="col-span-2">Settings</h1>
+          <input className="row-start-2" id="dark-mode" type="checkbox" checked={isDarkMode === true} onChange={toggleDarkMode} />
+          <label className="row-start-2" htmlFor="dark-mode">
+            Dark Mode
+          </label>
+        </div>
       </dialog>
     </>
   );

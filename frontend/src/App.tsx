@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import AllEntries from './routes/AllEntries'
 import NewEntry from './routes/NewEntry'
 import EditEntry from './routes/EditEntry'
-import { EntryProvider } from './utilities/globalContext'
+import { EntryProvider, DarkModeProvider } from './utilities/globalContext'
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,6 +14,7 @@ export default function App() {
   return (
     <section>
   <Router>
+    <DarkModeProvider>
     <EntryProvider>
     <NavBar></NavBar>
       <Routes>
@@ -25,6 +26,7 @@ export default function App() {
         </Route>
       </Routes>
     </EntryProvider>
+    </DarkModeProvider>
     </Router>
     </section>
     
